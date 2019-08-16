@@ -1,0 +1,30 @@
+.poke {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pokemon-name {
+    text-transform: capitalize;
+}
+
+.poke-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    width: 200px;
+    border: 1px solid #393131;
+    background-color:#8b8b8b;
+    margin: 10px;
+    list-style: none;
+}
+
+.image-container {
+    height: 60%;
+}
+
+.image-container img {
+    height: 100%;
+    object-fit: contain;
+}
