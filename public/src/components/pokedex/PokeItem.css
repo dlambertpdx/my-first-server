@@ -1,21 +1,20 @@
-.poke {
-    display: flex;
-    flex-wrap: wrap;
-}
-
+@import url('https://fonts.googleapis.com/css?family=Livvic&display=swap');
 .pokemon-name {
     text-transform: capitalize;
+    font-family: 'Livvic', sans-serif;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 
 .poke-item {
-    display: flex;
-    flex-direction: column;
+    text-align: center;
     align-items: center;
     justify-content: space-between;
     height: 200px;
-    width: 200px;
+    padding: 10px;
     border: 1px solid #393131;
     background-color:#8b8b8b;
+    box-shadow: 0 8px 6px -6px black;
     margin: 10px;
     list-style: none;
 }

@@ -1,42 +1,48 @@
 import Component from './Component.js';
 import Header from './Header.js';
 import PokeList from '../pokedex/PokeList.js';
-// import { getPoke } from '../../services/pokedex-api.js';
-// import hashStorage from '../../services/hash-storage';
+import { getPoke } from '../../services/pokedex-api.js';
+import hashStorage from '../../services/hash-storage.js';
+import Search from '../options/Search.js';
+import Paging from '../options/Paging.js';
 
 class App extends Component {
 
     onRender(dom){
         const header = new Header();
-        const headerDOM = header.renderDOM();
-        dom.prepend(headerDOM);
+        dom.prepend(header.renderDOM());
 
-        const url = 'https://alchemy-pokedex.herokuapp.com/api/pokedex?page=1&perPage=24';
-        let pokeList;
-        let pokeListDOM;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                pokeList = new PokeList({ pokemon: data });
-                pokeListDOM = pokeList.renderDOM();
-                const pokeDex = dom.querySelector('.list-section');
-                pokeDex.appendChild(pokeListDOM);
-            });
+        const optionsSection = dom.querySelector('.options-section');
+        const search = new Search();
+        optionsSection.appendChild(search.renderDOM());
 
-        // const pokeList = new PokeList({ pokemon: [] });
+        const listSection = dom.querySelector('.list-section');
 
-        // function loadPoke() {
-        //     const options = hashStorage.get();
-        //     getPoke(options)
-        //         .then(data => {
-        //             const pokemon = data.results;
-        //             const totalCount = data.count;
-        //             pokeList.update({ pokemon: data });
+        const paging = new Paging();
+        listSection.appendChild(paging.renderDOM());
 
+        const pokeList = new PokeList({ pokemon: [] });
+        listSection.appendChild(pokeList.renderDOM());
 
-                    
-        //         });
-        // }
+        function loadPoke() {
+            const options = hashStorage.get();
+            getPoke(options)
+                .then(data => {
+                    const pokemon = data.results;
+                    const totalCount = data.count;
+
+                    pokeList.update({ pokemon: pokemon });
+                    paging.update({
+                        totalCount: totalCount,
+                        currentPage: +options.page
+                    });
+                });
+        }
+        loadPoke();
+
+        window.addEventListener('hashchange', () => {
+            loadPoke();
+        });
     }
     
     renderHTML() {

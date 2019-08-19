@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Livvic&display=swap');
+
+.paging {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    padding: 1em;
+    font-family: 'Livvic', sans-serif;
+    color: #b4d5bd;
+}
+
+.paging button {
+    background:none;
+    border: none;
+    color: #ff524a;
+    font-size: 3em;
+    align-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-shadow: 0 1px 2px black;
+}
+
+.paging, .search button:focus {
+    outline: none;
+}
